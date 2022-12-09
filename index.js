@@ -10,7 +10,7 @@ const app = express();
 app.use(cookieSession(
     {
         name: "session",
-        keys:["lama"],
+        keys:["mikalainovikau"],
         maxAge: 86400000
     }
 ))

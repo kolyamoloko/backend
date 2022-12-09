@@ -32,7 +32,7 @@ function(accessToken, refreshToken, profile, cb) {
 ));
 
 passport.serializeUser((user,done)=>{
-    done(null,user)
+  done(null,user)
 })
 
 passport.deserializeUser((user,done)=>{

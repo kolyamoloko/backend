@@ -2,6 +2,7 @@ const router = require("express").Router();
 const passport = require("passport");
 
 const CLIENT_URL = "https://all-movie-reviews.netlify.app/"
+const SERVER_URL = "https://backend-production-3201.up.railway.app/"
 
 router.get("/login/success", (req,res)=> {
     if(req.user){
@@ -32,7 +33,7 @@ router.get("/github", passport.authenticate("github", {scope:[
 router.get("/github/callback",
     passport.authenticate("github", {
     successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed",
+    failureRedirect: SERVER_URL + "login/failed",
 }));
 
 router.get("/google", passport.authenticate("google", {scope:[
@@ -42,7 +43,7 @@ router.get("/google", passport.authenticate("google", {scope:[
 router.get("/google/callback",
     passport.authenticate("google", {
     successRedirect: CLIENT_URL,
-    failureRedirect: "/login/failed",
+    failureRedirect: SERVER_URL + "login/failed",
 }));
 
 module.exports = router;
