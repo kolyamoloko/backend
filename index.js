@@ -23,7 +23,7 @@ app.use(
         credentials: true,
     })
 )
-const port = process.env.PORT || 5000
+const port = process.env.PORT;
 
 app.use("/auth", authRoute);
 
