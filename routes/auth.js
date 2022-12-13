@@ -1,9 +1,9 @@
-const router = require("express").Router();
-const passport = require("passport");
-
+import express from "express";
+import passport from "passport";
 const CLIENT_URL = "https://all-movie-reviews.netlify.app/"
 const SERVER_URL = "https://backend-production-3201.up.railway.app/"
-
+const router = express.Router();
+console.log('hello')
 router.get("/login/success", (req,res)=> {
     if(req.user){
         res.status(200).json({
@@ -45,5 +45,4 @@ router.get("/google/callback",
     successRedirect: CLIENT_URL,
     failureRedirect: SERVER_URL + "login/failed",
 }));
-
-module.exports = router;
+export default router;

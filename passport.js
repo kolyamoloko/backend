@@ -1,6 +1,6 @@
-const passport = require('passport');
-const GitHubStrategy = require('passport-github2').Strategy;
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+import passport from 'passport';
+import GitHubStrategy from 'passport-github2'.Strategy;
+import GoogleStrategy from 'passport-google-oauth20'.Strategy;
 const GITHUB_CLIENT_ID = "2eccc3bd3e3813c2e9be"
 const GITHUB_CLIENT_SECRET = "d5a9a4ae51c5e4676ee8c9a42e61a0b980b20e6a"
 const GOOGLE_CLIENT_ID = "597192839397-vacsrmg2uoc1g4kg7au04auidihiq4hf.apps.googleusercontent.com"
@@ -38,3 +38,4 @@ passport.serializeUser((user,done)=>{
 passport.deserializeUser((user,done)=>{
   done(null,user)
 })
+export default passport;  
