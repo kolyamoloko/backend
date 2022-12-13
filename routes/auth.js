@@ -1,9 +1,14 @@
 import express from "express";
 import passport from "passport";
+import jwt from "jsonwebtoken";
 const CLIENT_URL = "https://all-movie-reviews.netlify.app/"
 const SERVER_URL = "https://backend-production-3201.up.railway.app/"
+
 const router = express.Router();
-console.log('hello')
+
+router.get("/", (req, res) => {
+    res.send('Hello World!');
+})
 router.get("/login/success", (req,res)=> {
     if(req.user){
         res.status(200).json({

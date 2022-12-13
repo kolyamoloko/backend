@@ -3,6 +3,7 @@ import cookieSession from "cookie-session";
 import passport from "passport";
 import cors from "cors";
 import router from "./routes/auth.js";
+
 const app = express();
 const authRoute = router;
 
