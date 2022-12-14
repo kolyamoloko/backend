@@ -12,7 +12,7 @@ const GOOGLE_CLIENT_SECRET = "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"
 passport.use(new GitHubStrategy({
   clientID: GITHUB_CLIENT_ID,
   clientSecret: GITHUB_CLIENT_SECRET,
-  callbackURL: "/auth/github/callback"
+  callbackURL: "https://backend-production-3201.up.railway.app/auth/github/callback"
 },
 function(accessToken, refreshToken, profile, done) {
   User.findOrCreate({ githubId: profile.id, avatar: profile.photos[0] }, function (err, user) {
@@ -24,7 +24,7 @@ function(accessToken, refreshToken, profile, done) {
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: "/auth/google/callback"
+  callbackURL: "https://backend-production-3201.up.railway.app/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
   User.findOrCreate({ googleId: profile.id }, function (err, user) {
