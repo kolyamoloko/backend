@@ -1,6 +1,7 @@
 import express from "express";
 import passport from "passport";
 import jwt from "jsonwebtoken";
+import UserModel from '../models/User.js';
 const CLIENT_URL = "https://all-movie-reviews.netlify.app/"
 const SERVER_URL = "https://backend-production-3201.up.railway.app/"
 
