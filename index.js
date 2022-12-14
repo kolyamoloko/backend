@@ -4,6 +4,8 @@ import passport from "passport";
 import cors from "cors";
 import router from "./routes/auth.js";
 import mongoose from 'mongoose';
+
+mongoose.set('strictQuery', false);
 mongoose.connect(
     'mongodb+srv://admin:admin@backendforcourse.emgyltx.mongodb.net/?retryWrites=true&w=majority'
     ).then(()=> {

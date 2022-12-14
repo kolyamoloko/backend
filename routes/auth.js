@@ -1,7 +1,8 @@
 import express from "express";
-import passport from "passport";
+import passport from "../passport.js";
 import jwt from "jsonwebtoken";
 import UserModel from '../models/User.js';
+
 const CLIENT_URL = "https://all-movie-reviews.netlify.app/"
 const SERVER_URL = "https://backend-production-3201.up.railway.app/"
 
@@ -18,6 +19,7 @@ router.get("/login/success", (req,res)=> {
             user: req.user,
         })
     };
+    console.log('ok')
 });
 
 router.get("/logout", (req,res)=>{
@@ -32,7 +34,7 @@ router.get("/login/failed", (req,res)=> {
     });
 });
 
-router.get("/github", passport.authenticate("github", {scope:[
+router.get("/github", passport.authenticate('github', {scope:[
     "profile"
 ]}));
 
@@ -42,7 +44,7 @@ router.get("/github/callback",
     failureRedirect: SERVER_URL + "login/failed",
 }));
 
-router.get("/google", passport.authenticate("google", {scope:[
+router.get("/google", passport.authenticate('google', {scope:[
     "profile"
 ]}));
 
@@ -51,4 +53,5 @@ router.get("/google/callback",
     successRedirect: CLIENT_URL,
     failureRedirect: SERVER_URL + "login/failed",
 }));
+
 export default router;
