@@ -44,9 +44,8 @@ router.get("/github/callback",
     failureRedirect: SERVER_URL + "login/failed",
 }));
 
-router.get("/google", passport.authenticate('google', {scope:[
-    "profile"
-]}));
+router.get("/google", passport.authenticate('google', {
+    scope:["profile", "email"],}));
 
 router.get("/google/callback",
     passport.authenticate("google", {

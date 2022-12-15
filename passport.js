@@ -26,10 +26,8 @@ passport.use(new GoogleStrategy({
   clientSecret: GOOGLE_CLIENT_SECRET,
   callbackURL: "https://backend-production-3201.up.railway.app/auth/google/callback"
 },
-function(accessToken, refreshToken, profile, cb) {
-  User.findOrCreate({ googleId: profile.id }, function (err, user) {
-    return cb(err, user);
-  });
+function(accessToken, refreshToken, profile, done) {
+  console.log("user profile is:", profile)
 }
 ));
 
