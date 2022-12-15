@@ -35,7 +35,6 @@ app.use(
 const port = process.env.PORT || 5000;
 
 app.use("/auth", authRoute);
-
 app.listen(port, () => {
     console.log(port);
 })
