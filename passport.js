@@ -15,10 +15,8 @@ passport.use(new GitHubStrategy({
   clientSecret: GITHUB_CLIENT_SECRET,
   callbackURL: "https://backend-production-3201.up.railway.app/auth/github/callback"
 },
-function(accessToken, refreshToken, profile, done) {
-  User.findOrCreate({ githubId: profile.id, avatar: profile.photos[0] }, function (err, user) {
-    return done(err, user);
-  });
+async function(accessToken, refreshToken, profile, done) => {
+  console.log("user profile is:", profile);
 }
 ));
 
