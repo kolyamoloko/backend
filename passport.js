@@ -16,7 +16,7 @@ passport.use(new GitHubStrategy({
   callbackURL: "https://backend-production-3201.up.railway.app/auth/github/callback"
 },
 async (accessToken, refreshToken, profile, done) => {
-  console.log("user profile is:", profile);
+  await (console.log("user profile is:", profile))
 }
 ));
 
@@ -24,9 +24,9 @@ passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
   callbackURL: "https://backend-production-3201.up.railway.app/auth/google/callback"
-  },
-  async (accessToken, refreshToken, profile, done) => {
-    console.log("user profile is:", profile)
+},
+  async (accessToken, refreshToken, profile, done)=>{
+    await console.log("user profile is:", profile)
   }
 ));
 
