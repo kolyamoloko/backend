@@ -1,6 +1,7 @@
 import passport from 'passport';
 import { Strategy as Github } from 'passport-github2';
 import { Strategy as Google } from 'passport-google-oauth20';
+import User from './models/User.js';
 
 const GoogleStrategy = Google.Strategy;
 const GitHubStrategy = Github.Strategy;
@@ -25,10 +26,10 @@ passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
   callbackURL: "https://backend-production-3201.up.railway.app/auth/google/callback"
-},
-function(accessToken, refreshToken, profile, done) {
-  console.log("user profile is:", profile)
-}
+  },
+  async (accessToken, refreshToken, profile, done)=>{
+    console.log("user profile is:", profile)
+  }
 ));
 
 passport.serializeUser((user,done)=>{

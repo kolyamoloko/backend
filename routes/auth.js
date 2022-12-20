@@ -51,6 +51,8 @@ router.get("/google/callback",
     passport.authenticate("google", {
     successRedirect: CLIENT_URL,
     failureRedirect: SERVER_URL + "login/failed",
+    failureFlash: true,
+    successFlash: "Successfully logged in!",
 }));
 
 export default router;
