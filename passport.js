@@ -2,6 +2,7 @@ import passport from 'passport';
 import { Strategy as Github } from 'passport-github2';
 import { Strategy as Google } from 'passport-google-oauth20';
 import User from './models/User.js';
+import UserService from './user/index.js';
 
 const GoogleStrategy = Google.Strategy;
 const GitHubStrategy = Github.Strategy;
@@ -26,15 +27,39 @@ passport.use(new GoogleStrategy({
   callbackURL: "https://backend-production-3201.up.railway.app/auth/google/callback"
 },
   async (accessToken, refreshToken, profile, done)=>{
-    await console.log("user profile is:", profile)
+    const id = profile.id;
+    const email = profile.emails[0].value;
+    const firstName = profile.name.given_name;
+    const lastName = profile.name.family_name;
+    const profilePhoto = profile.photos[0].value;
+    const source = "google";
+    const currentUser = await UserService.getUserByEmail({ email })
+    if(!currentUser) {
+      const newUser = await UserService.addGoogleUser({
+        id,
+        email,
+        firstName,
+        lastName,
+        profilePhoto
+      })
+      return done(null, newUser);
+    }
+    if (currentUser.source != "google") {
+      //return error
+      return done(null, false, { message: `You have previously signed up with a different signin method` });
+    }
+    currentUser.lastVisited = new Date();
+    return done(null, currentUser);
   }
 ));
 
 passport.serializeUser((user,done)=>{
-  done(null,user)
+  done(null,user.id)
 })
 
-passport.deserializeUser((user,done)=>{
-  done(null,user)
+passport.deserializeUser(async (id,done)=>{
+  const currentUser = await User.findOne({ id });
+  done(null, currentUser)
 })
+
 export default passport;

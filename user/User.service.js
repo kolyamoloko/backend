@@ -14,10 +14,8 @@ const getUsers = (User) => () => {
 const getUserByEmail = (User) => async({ email }) => {
     return await User.findOne({ email })
 }
-module.exports = (User) => {
-    return {
-        addGoogleUser: addGoogleUser(User),
-        getUsers: getUsers(User),
-        getUserByEmail: getUserByEmail(User)
-    }
+export default {
+    addGoogleUser,
+    getUsers,
+    getUserByEmail
 }

@@ -1,4 +1,3 @@
-import User from '../models/User';
-import UserService from './User.service'
-
-module.exports = UserService(User)
+import User from '../models/User.js';
+import * as UserService from './User.service.js'
+export default UserService;

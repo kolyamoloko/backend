@@ -23,8 +23,10 @@ router.get("/login/success", (req,res)=> {
 });
 
 router.get("/logout", (req,res)=>{
-    req.logout();
-    res.redirect(CLIENT_URL);
+    req.session.destroy(function () {
+        res.clearCookie("connect.sid");
+        res.redirect("/");
+      });
 });
 
 router.get("/login/failed", (req,res)=> {

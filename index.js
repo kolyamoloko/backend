@@ -1,9 +1,12 @@
 import express from "express";
 import cookieSession from "cookie-session";
+import * as passportConfig from "./passport.js"
 import passport from "passport";
 import cors from "cors";
 import router from "./routes/auth.js";
 import mongoose from 'mongoose';
+import {MongoClient, ServerApiVersion} from 'mongodb';
+
 
 mongoose.set('strictQuery', false);
 mongoose.connect(
@@ -12,7 +15,13 @@ mongoose.connect(
         console.log("DB is ok")
     }).catch((err) => {
         console.log("Db ERORR", err)
-    })
+    },
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverApi: ServerApiVersion.v1 
+    },
+    )
 const app = express();
 const authRoute = router;
 
