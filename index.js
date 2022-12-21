@@ -48,3 +48,4 @@ app.use("/auth", authRoute);
 app.listen(port, () => {
     console.log(port);
 })
+console.log()
