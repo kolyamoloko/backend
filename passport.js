@@ -2,7 +2,6 @@ import passport from 'passport';
 import { Strategy as Github } from 'passport-github2';
 import { Strategy as Google } from 'passport-google-oauth20';
 import User from './models/User.js';
-import UserService from './user/index.js';
 
 const GoogleStrategy = Google.Strategy;
 const GitHubStrategy = Github.Strategy;
@@ -10,6 +9,23 @@ const GITHUB_CLIENT_ID = "2eccc3bd3e3813c2e9be"
 const GITHUB_CLIENT_SECRET = "d5a9a4ae51c5e4676ee8c9a42e61a0b980b20e6a"
 const GOOGLE_CLIENT_ID = "597192839397-vacsrmg2uoc1g4kg7au04auidihiq4hf.apps.googleusercontent.com"
 const GOOGLE_CLIENT_SECRET = "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"
+
+const addGoogleUser = (User) => ({
+  id, email, firstName, lastName, profilePhoto
+}) => {
+  const user = new User({
+      id, email, firstName, lastName, profilePhoto, source: "google"
+  })
+  return user.save();
+}
+
+const getUsers = (User) => () => {
+  return User.find({})
+}
+
+const getUserByEmail = (User) => async({ email }) => {
+  return await User.findOne({ email })
+}
 
 passport.use(new GitHubStrategy({
   clientID: GITHUB_CLIENT_ID,
@@ -33,9 +49,9 @@ passport.use(new GoogleStrategy({
     const lastName = profile.name.family_name;
     const profilePhoto = profile.photos[0].value;
     const source = "google";
-    const currentUser = await UserService.getUserByEmail({ email })
+    const currentUser = await getUserByEmail({ email })
     if(!currentUser) {
-      const newUser = await UserService.addGoogleUser({
+      const newUser = await addGoogleUser({
         id,
         email,
         firstName,
