@@ -6,7 +6,7 @@ import cors from "cors";
 import router from "./routes/auth.js";
 import mongoose from 'mongoose';
 import {MongoClient, ServerApiVersion} from 'mongodb';
-
+import flash from 'connect-flash';
 
 mongoose.set('strictQuery', false);
 mongoose.connect(
@@ -32,6 +32,7 @@ app.use(cookieSession(
         maxAge: 86400000
     }
 ))
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(
