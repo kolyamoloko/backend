@@ -58,7 +58,7 @@ passport.use(new GoogleStrategy({
       })
       return done(null, newUser);
     }
-    if (currentUser.source != "google") {
+    if (currentUser.source == "google") {
       //return error
       return done(null, false, { message: `You have previously signed up with a different signin method` });
     }
