@@ -1,4 +1,4 @@
-import PostModel from "../models/Post";
+/* import PostModel from "../models/Post";
 export const create = async (req, res) => {
     try {
         const doc = new PostModel({
@@ -17,4 +17,4 @@ export const create = async (req, res) => {
             message: 'Server error',
         });
     }
-}
+} */

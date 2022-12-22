@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+/* import mongoose from 'mongoose';
 let Schema = mongoose.Schema;
 
 const PostSchema = new Schema(
@@ -33,3 +33,4 @@ const PostSchema = new Schema(
 );
 
 export default mongoose.model('Post', PostSchema);
+ */
