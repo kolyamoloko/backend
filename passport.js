@@ -25,13 +25,43 @@ const getUserByEmail = (User) => async({ email }) => {
   return await User.findOne({ email })
 }
 
+const addGithubUser = (User) => ({
+  id, email, firstName, lastName, profilePhoto
+}) => {
+  const user = new User({
+      id, email, firstName, lastName, profilePhoto, source: "github"
+  })
+  return user.save();
+}
+
 passport.use(new GitHubStrategy({
   clientID: GITHUB_CLIENT_ID,
   clientSecret: GITHUB_CLIENT_SECRET,
   callbackURL: "https://backend-production-3201.up.railway.app/auth/github/callback"
 },
 async (accessToken, refreshToken, profile, done) => {
-  await (console.log("user profile is:", profile))
+  const id = profile.id;
+  const email = profile.profileUrl;
+  const firstName = profile.displayName;
+  const lastName = profile.userName;
+  const profilePhoto = profile.photos[0].value;
+  const source = "github";
+  const currentUser = await getUserByEmail({ email });
+  if(!currentUser) {
+    const newUser = await addGithubUser({
+      id,
+      email,
+      firstName,
+      lastName,
+      profilePhoto
+    })
+    return done(null, newUser);
+  }
+  if (currentUser.source != "github") {
+    return done(null, false, { message: `You have previously signed up with a google method` });
+  }
+  currentUser.lastVisited = new Date();
+  return done(null, currentUser);
 }
 ));
 
@@ -47,7 +77,7 @@ passport.use(new GoogleStrategy({
     const lastName = profile.name.family_name;
     const profilePhoto = profile.photos[0].value;
     const source = "google";
-    const currentUser = await getUserByEmail({ email })
+    const currentUser = await getUserByEmail({ email });
     if(!currentUser) {
       const newUser = await addGoogleUser({
         id,
@@ -59,7 +89,6 @@ passport.use(new GoogleStrategy({
       return done(null, newUser);
     }
     if (currentUser.source != "google") {
-      //return error
       return done(null, false, { message: `You have previously signed up with a different signin method` });
     }
     currentUser.lastVisited = new Date();
