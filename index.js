@@ -83,13 +83,6 @@ app.get("/auth/login/success", (req,res)=> {
     console.log('ok')
 });
 
-app.get("/auth/logout", (req,res)=>{
-    req.session.destroy(function () {
-        res.clearCookie("connect.sid");
-        res.redirect("/");
-      });
-});
-
 app.get("/profile", isLoggedIn, (req, res) => {
     if(req.user){
         res.status(200).json({
@@ -100,6 +93,11 @@ app.get("/profile", isLoggedIn, (req, res) => {
     };
     console.log('profile')
   });
+
+app.get("/auth/logout", (req,res)=>{
+    req.session = null;
+    res.redirect = "/profile"
+});
 
 app.get("/auth/login/failed", (req,res)=> {
     res.status(401).json({
