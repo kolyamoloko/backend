@@ -23,8 +23,10 @@ router.get("/login/success", (req,res)=> {
 });
 
 router.get("/logout", (req,res)=>{
-    req.logout();
-    res.redirect(CLIENT_URL);
+    req.session.destroy(function () {
+        res.clearCookie("connect.sid");
+        res.redirect("/auth");
+      });
 });
 
 router.get("/login/failed", (req,res)=> {
@@ -35,13 +37,15 @@ router.get("/login/failed", (req,res)=> {
 });
 
 router.get("/github", passport.authenticate('github', {scope:[
-    "profile"
+    "profile", "email"
 ]}));
 
 router.get("/github/callback",
     passport.authenticate("github", {
     successRedirect: CLIENT_URL,
-    failureRedirect: SERVER_URL + "login/failed",
+    failureRedirect: "/login/failed",
+    failureFlash: true,
+    successFlash: "Successfully logged in!",
 }));
 
 router.get("/google", passport.authenticate('google', {
@@ -50,9 +54,8 @@ router.get("/google", passport.authenticate('google', {
 router.get("/google/callback",
     passport.authenticate("google", {
     successRedirect: CLIENT_URL,
-    failureRedirect: SERVER_URL + "login/failed",
+    failureRedirect: "/login/failed",
     failureFlash: true,
     successFlash: "Successfully logged in!",
 }));
-
 export default router;
