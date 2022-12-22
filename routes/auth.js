@@ -44,8 +44,6 @@ router.get("/github/callback",
     passport.authenticate("github", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
-    failureFlash: true,
-    successFlash: "Successfully logged in!",
 }));
 
 router.get("/google", passport.authenticate('google', {
@@ -55,7 +53,5 @@ router.get("/google/callback",
     passport.authenticate("google", {
     successRedirect: CLIENT_URL,
     failureRedirect: "/login/failed",
-    failureFlash: true,
-    successFlash: "Successfully logged in!",
 }));
 export default router;
