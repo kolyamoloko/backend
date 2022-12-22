@@ -95,6 +95,10 @@ app.get("/profile", isLoggedIn, (req, res) => {
   });
 
 app.get("/auth/logout", (req,res)=>{
+        req.logout(function(err) {
+        if (err) {
+            return next(err);
+        }});
     req.session = null;
     res.redirect = "https://all-movie-reviews.netlify.app/login"
 });
