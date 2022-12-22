@@ -5,26 +5,26 @@ const addGoogleUser = (User) => ({ id, email, firstName, lastName, profilePhoto 
       id, email, firstName, lastName, profilePhoto, source: "google"
     })
     return user.save()
-  }
-  
-    const addGithubUser = (User) => ({ id, email, firstName, lastName, profilePhoto }) => {
-        console.log(id, email, firstName, lastName, profilePhoto)
-    
-        const user = new User({
-        id, email, firstName, lastName, profilePhoto, source: "github"
-        })
-        return user.save()
-    }
-    
-    const getUsers = (User) => () => {
-        return User.find({})
-    }
-    
-    const getUserByEmail = (User) => async ({ email }) => {
-        return await User.findOne({ email })
-    }
+}
 
-    module.exports = (User) => {
+const addGithubUser = (User) => ({ id, email, firstName, lastName, profilePhoto }) => {
+    console.log(id, email, firstName, lastName, profilePhoto)
+
+    const user = new User({
+    id, email, firstName, lastName, profilePhoto, source: "github"
+    })
+    return user.save()
+}
+    
+const getUsers = (User) => () => {
+    return User.find({})
+}
+
+const getUserByEmail = (User) => async ({ email }) => {
+    return await User.findOne({ email })
+}
+
+module.exports = (User) => {
     return {
         addGoogleUser: addGoogleUser(User),
         getUsers: getUsers(User),

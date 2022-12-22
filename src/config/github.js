@@ -15,9 +15,9 @@ passport.use(new GitHubStrategy({
     const lastName = profile.userName;
     const profilePhoto = profile.photos[0].value;
     const source = "github";
-    const currentUser = await getUserByEmail({ email });
+    const currentUser = await UserService.getUserByEmail({ email });
     if(!currentUser) {
-      const newUser = await addGithubUser({
+      const newUser = await UserService.ddGithubUser({
         id,
         email,
         firstName,
