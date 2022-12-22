@@ -28,6 +28,7 @@ module.exports = (User) => {
     return {
         addGoogleUser: addGoogleUser(User),
         getUsers: getUsers(User),
-        getUserByEmail: getUserByEmail(User)
+        getUserByEmail: getUserByEmail(User),
+        addGithubUser: addGithubUser(User),
     }
 }
