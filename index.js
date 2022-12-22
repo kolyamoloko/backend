@@ -44,7 +44,6 @@ app.use(
         name: "session",
         secret: "novikau",
         keys:["mikalainovikau"],
-        maxAge: 86400000,
         resave: false,
         saveUninitialized: false,
     }
