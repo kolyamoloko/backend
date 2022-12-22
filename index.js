@@ -95,7 +95,7 @@ app.get("/profile", isLoggedIn, (req, res) => {
   });
 
 app.get("/auth/logout", (req,res)=>{
-        req.logout(function(err) {
+        req.logOut(function(err) {
         if (err) {
             return next(err);
         }});
