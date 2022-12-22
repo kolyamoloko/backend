@@ -57,9 +57,6 @@ async (accessToken, refreshToken, profile, done) => {
     })
     return done(null, newUser);
   }
-  if (currentUser.source != "github") {
-    return done(null, false, { message: `You have previously signed up with a google method` });
-  }
   currentUser.lastVisited = new Date();
   return done(null, currentUser);
 }
@@ -87,9 +84,6 @@ passport.use(new GoogleStrategy({
         profilePhoto
       })
       return done(null, newUser);
-    }
-    if (currentUser.source != "google") {
-      return done(null, false, { message: `You have previously signed up with a different signin method` });
     }
     currentUser.lastVisited = new Date();
     return done(null, currentUser);
