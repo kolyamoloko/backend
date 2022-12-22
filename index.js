@@ -96,7 +96,7 @@ app.get("/profile", isLoggedIn, (req, res) => {
 
 app.get("/auth/logout", (req,res)=>{
     req.session = null;
-    res.redirect = "/profile"
+    res.redirect = "https://all-movie-reviews.netlify.app/login"
 });
 
 app.get("/auth/login/failed", (req,res)=> {
