@@ -46,7 +46,7 @@ app.use(
         keys:["mikalainovikau"],
         maxAge: 86400000,
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
     }
 ))
 app.use(flash());
@@ -95,7 +95,7 @@ app.get("/profile", isLoggedIn, (req, res) => {
   });
 
 app.get("/auth/logout", (req,res)=>{
-        req.logOut(function(err) {
+        req.logout(function(err) {
         if (err) {
             return next(err);
         }});
