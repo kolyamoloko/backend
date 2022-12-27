@@ -9,7 +9,8 @@ const passport = require("passport");
 const cors = require("cors");
 const mongoose = require('mongoose');
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const UserService = require("./src/user"); //need
+const UserService = require("./src/user");
+const PostService = require("./src/post");
 
 require("./src/config/passport");
 require("./src/config/google");
@@ -131,9 +132,10 @@ app.get("/auth/google/callback",
     failureFlash: true,
     successFlash: "Successfully logged in!",
 }));
+app.post('/post', PostService.createPost)
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => {
+app.listen(port, () => {+
     console.log(port);
 })
